@@ -32,7 +32,35 @@ static void bootMessage(struct gecko_msg_system_boot_evt_t *bootevt);
 /* Flag for indicating DFU Reset must be performed */
 static uint8_t boot_to_dfu = 0;
 
+static void application_task()
+{
+  uint16_t year, ms;
+  uint8_t month, day, weekday, hour, min, sec;
+  uint16_t updays, uphours, upmins, upsec, upms;
+  static uint32_t last_time = 0;
+  static uint32_t overflow = 0;
 
+  uint32_t uptime = RTCC_CounterGet();
+
+  // Check if counter has overflown.
+  if (uptime < last_time) {
+    overflow++;
+  }
+
+  last_time = uptime;
+
+  updays = (overflow * 131072 + uptime / TICKS_PER_SECOND) / 60 / 60 / 24;
+  uphours = (overflow * 131072 + uptime / TICKS_PER_SECOND) / 60 / 60 % 24;
+  upmins = (overflow * 131072 + uptime / TICKS_PER_SECOND) / 60 % 60;
+  upsec = (overflow * 131072 + uptime / TICKS_PER_SECOND) % 60;
+  upms = uptime % TICKS_PER_SECOND * 1000 / TICKS_PER_SECOND;
+
+  get_date_and_time(&year, &month, &day, &weekday, &hour, &min, &sec, &ms);
+
+  printLog("%4d-%02d-%02d %02d:%02d:%02d.%03d %s   uptime: %03d-%02d:%02d:%02d.%03d -awake \r", year, month, day, hour, min, sec, ms, weekdays[weekday-1], updays, uphours, upmins, upsec, upms);
+
+  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+}
 
 
 int32_t  RADIO_tempData = 25000;
@@ -141,6 +169,9 @@ void appMain(gecko_configuration_t *pconfig)
     		  }
        break;
       case gecko_evt_hardware_soft_timer_id:
+
+
+
     	  	  	  alsMeasurement();
               	  break;
 
