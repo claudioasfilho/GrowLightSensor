@@ -17,13 +17,14 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_database_hash                    6
 #define gattdb_client_support_features          8
 #define gattdb_device_name                     11
-#define gattdb_Hour                            16
-#define gattdb_Minute                          19
 #define gattdb_TriggerALS                      23
 #define gattdb_MaxTime                         26
 #define gattdb_UVIndex                         29
 #define gattdb_AmbientLight                    32
 #define gattdb_BulkAlsUv                       35
-#define gattdb_ota_control                     46
+#define gattdb_current_time_2                  39
+#define gattdb_local_time_information          42
+#define gattdb_reference_time_information         44
+#define gattdb_ota_control                     47
 
 #endif

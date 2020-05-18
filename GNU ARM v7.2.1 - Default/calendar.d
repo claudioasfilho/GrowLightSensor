@@ -1,10 +1,5 @@
-app.o: ../app.c \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hal-config.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/board_features.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/ble-configuration.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/EFR32MG12_BRD4166A/config/hal-config-board.h \
+calendar.o: ../calendar.c \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_rtcc.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/em_device.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/efr32mg12p332f1024gl125.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/CMSIS/Include/core_cm4.h \
@@ -59,35 +54,27 @@ app.o: ../app.c \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/efr32mg12p_dmareq.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/efr32mg12p_af_ports.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/efr32mg12p_af_pins.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_assert.h \
+ ../calendar.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hal-config.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/board_features.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/ble-configuration.h \
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/EFR32MG12_BRD4166A/config/hal-config-board.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/halconfig/inc/hal-config/hal-config-types.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_gpio.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_bus.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_assert.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hal-config-app-common.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h \
- ../gatt_db.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/bsp/thunderboard/si1133.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/EFR32MG12_BRD4166A/config/si1133_config.h \
  ../app.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/drivers/retargetserial.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/retargetserialhalconfig.h \
- ../calendar.h
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/retargetserialhalconfig.h
 
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hal-config.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/board_features.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/ble-configuration.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/EFR32MG12_BRD4166A/config/hal-config-board.h:
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_rtcc.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/em_device.h:
 
@@ -197,13 +184,27 @@ app.o: ../app.c \
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/Device/SiliconLabs/EFR32MG12P/Include/efr32mg12p_af_pins.h:
 
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_assert.h:
+
+../calendar.h:
+
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
+
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h:
+
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hal-config.h:
+
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/board_features.h:
+
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/ble-configuration.h:
+
+/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/EFR32MG12_BRD4166A/config/hal-config-board.h:
+
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/halconfig/inc/hal-config/hal-config-types.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_gpio.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_bus.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_assert.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hal-config-app-common.h:
 
@@ -215,18 +216,8 @@ app.o: ../app.c \
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h:
 
-../gatt_db.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/bsp/thunderboard/si1133.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/EFR32MG12_BRD4166A/config/si1133_config.h:
-
 ../app.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/drivers/retargetserial.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/retargetserialhalconfig.h:
-
-../calendar.h:

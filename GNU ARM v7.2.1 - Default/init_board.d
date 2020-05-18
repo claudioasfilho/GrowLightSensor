@@ -71,16 +71,7 @@ init_board.o: ../init_board.c \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/platform/emlib/inc/em_usart.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/drivers/mx25flash_spi.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/mx25flashhalconfig.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/bsp/bsp.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h \
- ../app.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/drivers/retargetserial.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/retargetserialhalconfig.h
+ /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/bsp/bsp.h
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/bsphalconfig.h:
 
@@ -229,21 +220,3 @@ init_board.o: ../init_board.c \
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/mx25flashhalconfig.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/bsp/bsp.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h:
-
-../app.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/drivers/retargetserial.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSs/hardware/kit/common/halconfig/retargetserialhalconfig.h:

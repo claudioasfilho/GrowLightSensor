@@ -25,6 +25,7 @@
 #include "gatt_db.h"
 #include "thunderboard/si1133.h"
 #include "app.h"
+#include "calendar.h"
 
 /* Print boot message */
 static void bootMessage(struct gecko_msg_system_boot_evt_t *bootevt);
@@ -32,36 +33,7 @@ static void bootMessage(struct gecko_msg_system_boot_evt_t *bootevt);
 /* Flag for indicating DFU Reset must be performed */
 static uint8_t boot_to_dfu = 0;
 
-static void application_task()
-{
-  uint16_t year, ms;
-  uint8_t month, day, weekday, hour, min, sec;
-  uint16_t updays, uphours, upmins, upsec, upms;
-  static uint32_t last_time = 0;
-  static uint32_t overflow = 0;
-
-  uint32_t uptime = RTCC_CounterGet();
-
-  // Check if counter has overflown.
-  if (uptime < last_time) {
-    overflow++;
-  }
-
-  last_time = uptime;
-
-  updays = (overflow * 131072 + uptime / TICKS_PER_SECOND) / 60 / 60 / 24;
-  uphours = (overflow * 131072 + uptime / TICKS_PER_SECOND) / 60 / 60 % 24;
-  upmins = (overflow * 131072 + uptime / TICKS_PER_SECOND) / 60 % 60;
-  upsec = (overflow * 131072 + uptime / TICKS_PER_SECOND) % 60;
-  upms = uptime % TICKS_PER_SECOND * 1000 / TICKS_PER_SECOND;
-
-  get_date_and_time(&year, &month, &day, &weekday, &hour, &min, &sec, &ms);
-
-  printLog("%4d-%02d-%02d %02d:%02d:%02d.%03d %s   uptime: %03d-%02d:%02d:%02d.%03d -awake \r", year, month, day, hour, min, sec, ms, weekdays[weekday-1], updays, uphours, upmins, upsec, upms);
-
-  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
-}
-
+#define ALS_TIMER_HANDLE (252)
 
 int32_t  RADIO_tempData = 25000;
 uint8_t  RADIO_uvIndex = 0;
@@ -103,6 +75,10 @@ void appMain(gecko_configuration_t *pconfig)
   /* Initialize debug prints. Note: debug prints are off by default. See DEBUG_LEVEL in app.h */
   initLog();
 
+  set_date_and_time(2020, MAY, 18, MONDAY, 9, 56, 00, 000);
+  set_time_zone(8);
+  set_dst(0);
+
   /* Initialize stack */
   gecko_init(pconfig);
 
@@ -129,7 +105,12 @@ void appMain(gecko_configuration_t *pconfig)
         bootMessage(&(evt->data.evt_system_boot));
         printLog("boot event - starting advertising\r\n");
 
-        gecko_cmd_hardware_set_soft_timer(32768,0,0);
+
+        // Setup soft timers
+        gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND, SEC_TIMER_HANDLE, 0); // 1 sec continuous running
+        gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND * 60, MINUTE_TIMER_HANDLE, 0); // 1 min continuous running
+
+        gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND,ALS_TIMER_HANDLE,0);
 
         /* Set advertising parameters. 100ms advertisement interval.
          * The first parameter is advertising set handle
@@ -166,14 +147,55 @@ void appMain(gecko_configuration_t *pconfig)
 						gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_UVIndex,0,sizeof(RADIO_uvIndex),(uint8_t *)&RADIO_uvIndex);
 						}
 					break;
+
+				  case gattdb_current_time_2:
+					  {
+						struct current_time_characteristic current_time;
+						uint16_t ms;
+						current_time.adjust_reason = 0x1;
+						get_date_and_time((uint16_t *) &(current_time.exact_time.day_date_time.date_time.year), (uint8_t *) &(current_time.exact_time.day_date_time.date_time.month), (uint8_t *) &(current_time.exact_time.day_date_time.date_time.day), (uint8_t *) &(current_time.exact_time.day_date_time.day_of_week), (uint8_t *) &(current_time.exact_time.day_date_time.date_time.hour), (uint8_t *) &(current_time.exact_time.day_date_time.date_time.minute), (uint8_t *) &(current_time.exact_time.day_date_time.date_time.second), &ms);
+						current_time.exact_time.frac_256 = ms * 256 / 1000;
+						gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, sizeof(struct current_time_characteristic), (uint8_t const*) &current_time);
+					  }
+					break;
+
+
+				  case gattdb_local_time_information:{
+			          struct local_time_information_characteristic local_time_info;
+			          local_time_info.time_zone = get_time_zone();
+			          local_time_info.dst_offset = get_dst();
+			          gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, sizeof(struct local_time_information_characteristic), (uint8_t const*) &local_time_info);
+			        }
+					break;
+
+			/*
+				  case :
+					  {
+
+					  }
+					break;
+					*/
     		  }
        break;
       case gecko_evt_hardware_soft_timer_id:
 
+    	  switch(evt->data.evt_hardware_soft_timer.handle)
+    	  {
+			  case SEC_TIMER_HANDLE:
+					  application_task();
+					  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+				  break;
+			  case MINUTE_TIMER_HANDLE:
+					  update_calendar();
 
+				  break;
 
-    	  	  	  alsMeasurement();
-              	  break;
+			  case ALS_TIMER_HANDLE:
+					  alsMeasurement();
+				   break;
+    	  }
+
+      break;
 
       case gecko_evt_le_connection_closed_id:
 
