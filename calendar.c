@@ -211,3 +211,13 @@ uint8_t get_dst()
 {
   return cal_dst;
 }
+
+uint8_t  get_hour()
+{
+  return cal_hour;
+}
+
+uint8_t  get_minute()
+{
+  return cal_min;
+}

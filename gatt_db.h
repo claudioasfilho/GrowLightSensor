@@ -18,13 +18,21 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_client_support_features          8
 #define gattdb_device_name                     11
 #define gattdb_TriggerALS                      23
-#define gattdb_MaxTime                         26
-#define gattdb_UVIndex                         29
-#define gattdb_AmbientLight                    32
-#define gattdb_BulkAlsUv                       35
-#define gattdb_current_time_2                  39
-#define gattdb_local_time_information          42
-#define gattdb_reference_time_information         44
-#define gattdb_ota_control                     47
+#define gattdb_UVIndex                         26
+#define gattdb_AmbientLight                    29
+#define gattdb_BulkAls                         32
+#define gattdb_BulkUv                          35
+#define gattdb_Index                           38
+#define gattdb_ALSb                            41
+#define gattdb_UVb                             44
+#define gattdb_MeasurementCount                48
+#define gattdb_HowOften                        51
+#define gattdb_HowManySamples                  54
+#define gattdb_startHour                       57
+#define gattdb_startMinute                     60
+#define gattdb_current_time_2                  64
+#define gattdb_local_time_information          67
+#define gattdb_reference_time_information         69
+#define gattdb_ota_control                     72
 
 #endif

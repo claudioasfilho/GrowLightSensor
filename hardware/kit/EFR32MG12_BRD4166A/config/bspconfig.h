@@ -51,7 +51,7 @@
 #define BSP_DISP_ENABLE_PIN   15                /* MemLCD display enable */
 
 #define BSP_GPIO_LEDS
-#define BSP_NO_OF_LEDS          2
+//#define BSP_NO_OF_LEDS          2
 #define BSP_GPIO_LED0_PORT      gpioPortD
 #define BSP_GPIO_LED0_PIN       8
 #define BSP_GPIO_LED1_PORT      gpioPortD
@@ -59,13 +59,13 @@
 #define BSP_GPIO_LEDARRAY_INIT  { { BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN }, { BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN } }
 
 #define BSP_GPIO_BUTTONS
-#define BSP_NO_OF_BUTTONS       2
+//#define BSP_NO_OF_BUTTONS       2
 #define BSP_GPIO_PB0_PORT       gpioPortD
 #define BSP_GPIO_PB0_PIN        14
 #define BSP_GPIO_PB1_PORT       gpioPortD
 #define BSP_GPIO_PB1_PIN        15
 
-#define BSP_GPIO_BUTTONARRAY_INIT { { BSP_GPIO_PB0_PORT, BSP_GPIO_PB0_PIN }, { BSP_GPIO_PB1_PORT, BSP_GPIO_PB1_PIN } }
+//#define BSP_GPIO_BUTTONARRAY_INIT { { BSP_GPIO_PB0_PORT, BSP_GPIO_PB0_PIN }, { BSP_GPIO_PB1_PORT, BSP_GPIO_PB1_PIN } }
 
 #define BSP_INIT_DEFAULT        0
 

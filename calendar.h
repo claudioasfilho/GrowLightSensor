@@ -87,6 +87,9 @@ int8_t get_time_zone();
 void set_dst(uint8_t dst);
 uint8_t get_dst();
 
+uint8_t get_hour();
+uint8_t  get_minute();
+
 #ifdef __cplusplus
 }
 #endif
