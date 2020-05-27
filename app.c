@@ -162,7 +162,7 @@ void AlsUVHandler()
 
 		  printLog("%d:%d Als %d, Uv %d MCount %d \n\r",sensorMeasurements.startHour,sensorMeasurements.startMinute, sensorMeasurements.datablock.all[measurementCount].ambLight,sensorMeasurements.datablock.all[measurementCount].uvIndex, measurementCount);
 
-		 measurementCount++;
+		  if(ALSTrigger == 1) measurementCount++;
 
 	  }
 	 else  if (measurementCount == 48)
@@ -310,7 +310,8 @@ void appMain(gecko_configuration_t *pconfig)
     		  {
 				  case gattdb_AmbientLight:
 					  {
-						  AlsUVHandler();
+						  //AlsUVHandler();
+						  alsMeasurement();
 						/* Send response to read request */
 						gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_AmbientLight,0,sizeof(RADIO_ambLight),(uint8_t *)&RADIO_ambLight);
 						}
@@ -319,7 +320,8 @@ void appMain(gecko_configuration_t *pconfig)
 							//gattdb_UVIndex
 				  case gattdb_UVIndex:
 					  {
-						  AlsUVHandler();
+						  //AlsUVHandler();
+						  alsMeasurement();
 						/* Send response to read request */
 						gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_UVIndex,0,sizeof(RADIO_uvIndex),(uint8_t *)&RADIO_uvIndex);
 						}
@@ -347,19 +349,20 @@ void appMain(gecko_configuration_t *pconfig)
 
 				  case gattdb_BulkAls:
 				  {
-					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, sizeof(ambLightArray), (uint8_t) &ambLightArray);
+					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, gattdb_BulkAls, 0, sizeof(ambLightArray), &ambLightArray);
 					 //storeSensorData(0);
 					 for (int i=0 ; i<48 ; i++)
 					 {
-						 printLog("%d \n\r", sensorMeasurements.datablock.all[i].ambLight);
+						 printLog("BULK i:%d Measurement:%d\n\r", i, sensorMeasurements.datablock.all[i].ambLight);
 
 					 }
+					 ALSTrigger = 0;
 
 				  }
 				  break;
 				  case gattdb_BulkUv:
 				  {
-					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, sizeof(uvIndexArray), (uint8_t) &uvIndexArray);
+					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, gattdb_BulkUv, 0, sizeof(uvIndexArray), (uint8_t) &uvIndexArray);
 					 //storeSensorData(1);
 					 for (int i=0 ; i<48 ; i++)
 										 {
@@ -371,12 +374,17 @@ void appMain(gecko_configuration_t *pconfig)
 
 				  case gattdb_ALSb:
 				  {
-					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, 4, (uint8_t) &ambLightArray[gattIndex]);
-					 //storeSensorData(0);
-
-						 printLog("index %d, ALS %d \n\r", gattIndex, ambLightArray[gattIndex]);
+					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, gattdb_ALSb, 0, 4, (uint8_t) &ambLightArray[gattIndex]);
+					 printLog("GATT index %d, ALS %d \n\r", gattIndex, ambLightArray[gattIndex]);
 				  }
 					break;
+
+				  case gattdb_Index:
+				  				  {
+				  					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, 1, (uint8_t) &gattIndex);
+				  					 printLog("GATT index %d \n\r", gattIndex);
+				  				  }
+				  					break;
 
 				  case gattdb_MeasurementCount:
 				  {
