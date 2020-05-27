@@ -72,10 +72,7 @@ app.o: ../app.c \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/bsp/thunderboard/si1133.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/EFR32MG12_BRD4166A/config/si1133_config.h \
- ../app.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/retargetserial.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/retargetserialhalconfig.h \
- ../calendar.h \
+ ../app.h ../calendar.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/platform/emlib/inc/em_usart.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/mx25flash_spi.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/mx25flashhalconfig.h
@@ -227,10 +224,6 @@ app.o: ../app.c \
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/EFR32MG12_BRD4166A/config/si1133_config.h:
 
 ../app.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/retargetserial.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/retargetserialhalconfig.h:
 
 ../calendar.h:
 

@@ -70,9 +70,7 @@ calendar.o: ../calendar.c \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h \
- ../app.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/retargetserial.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/retargetserialhalconfig.h
+ ../app.h
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/platform/emlib/inc/em_rtcc.h:
 
@@ -217,7 +215,3 @@ calendar.o: ../calendar.c \
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h:
 
 ../app.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/retargetserial.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/retargetserialhalconfig.h:

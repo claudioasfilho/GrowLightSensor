@@ -152,6 +152,12 @@ void AlsUVHandler()
 
 	 alsMeasurement();
 
+	 if ((measurementCount == 0) && (ALSTrigger == 1))
+		{
+		  sensorMeasurements.startHour = get_hour();
+		  sensorMeasurements.startMinute = get_minute();
+		}
+
 	 if (measurementCount < 48)
 	  {
 
@@ -173,6 +179,8 @@ void AlsUVHandler()
 			 printLog("ALS %d UV %d \n\r", ambLightArray[i], uvIndexArray[i]);
 
 		 }
+		 ALSTrigger = 0;
+		 gecko_cmd_hardware_set_soft_timer(0,ALS_TIMER_HANDLE,0);
 	 }
 
 #endif
@@ -243,7 +251,7 @@ void appMain(gecko_configuration_t *pconfig)
   /* Initialize debug prints. Note: debug prints are off by default. See DEBUG_LEVEL in app.h */
   initLog();
 
-  set_date_and_time(2020, MAY, 25, MONDAY, 10, 20, 00, 000);
+  set_date_and_time(2020, MAY, 26, TUESDAY, 22, 13, 00, 000);
   set_time_zone(8);
   set_dst(0);
 
@@ -275,10 +283,10 @@ void appMain(gecko_configuration_t *pconfig)
         alsMeasurement();
         gecko_cmd_system_set_tx_power(0);
         // Setup soft timers
-   //     gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND, SEC_TIMER_HANDLE, 0); // 1 sec continuous running
-   //     gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND * 60, MINUTE_TIMER_HANDLE, 0); // 1 min continuous running
+        gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND, SEC_TIMER_HANDLE, 0); // 1 sec continuous running
+        gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND * 60, MINUTE_TIMER_HANDLE, 0); // 1 min continuous running
 
-#if 1
+#if 0
         ALSTrigger = 1;
         init_sensorData();
         gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND,ALS_TIMER_HANDLE,0);
@@ -301,6 +309,8 @@ void appMain(gecko_configuration_t *pconfig)
       case gecko_evt_le_connection_opened_id:
 
         printLog("connection opened\r\n");
+        gecko_cmd_le_connection_set_timing_parameters(evt->data.evt_le_connection_opened.connection, 320, 320, 5, 450, 100, 0xFFFF);
+
 
         break;
 
@@ -365,10 +375,10 @@ void appMain(gecko_configuration_t *pconfig)
 					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, gattdb_BulkUv, 0, sizeof(uvIndexArray), (uint8_t) &uvIndexArray);
 					 //storeSensorData(1);
 					 for (int i=0 ; i<48 ; i++)
-										 {
-											 printLog("%d \n\r", sensorMeasurements.datablock.all[i].uvIndex);
+					 {
+						 printLog("%d \n\r", sensorMeasurements.datablock.all[i].uvIndex);
 
-										 }
+					 }
 				  }
 				  break;
 
@@ -408,6 +418,7 @@ void appMain(gecko_configuration_t *pconfig)
 				  {
 					 gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection, evt->data.evt_gatt_server_user_read_request.characteristic, 0, 1, (uint8_t)&ALSTrigger);
 					 printLog("Trigger %d \n\r",ALSTrigger );
+
 				  }
 					break;
 
@@ -489,13 +500,14 @@ void appMain(gecko_configuration_t *pconfig)
         	case gattdb_TriggerALS:
         	{
         		ALSTrigger = evt->data.evt_gatt_server_attribute_value.value.data[0];//1;
-
-        		gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND*60*ALS_TIMER_PERIOD,ALS_TIMER_HANDLE,0);
-        		//gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND,ALS_TIMER_HANDLE,0);
-
 			  gecko_cmd_gatt_server_send_user_write_response(evt->data.evt_gatt_server_user_write_request.connection, evt->data.evt_gatt_server_user_write_request.characteristic, 0);
-			  init_sensorData();
-			  printLog("Trigger enabled \n\r");
+				 if (ALSTrigger == 1)
+				 {
+					 init_sensorData();
+					 AlsUVHandler();
+					 gecko_cmd_hardware_set_soft_timer(TICKS_PER_SECOND*60*15,ALS_TIMER_HANDLE,0);
+				 }
+
         	}
         	break;
 

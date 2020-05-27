@@ -78,8 +78,6 @@ main.o: ../main.c ../init_mcu.h ../board_features.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/bsphalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/bsp/bsp_bcp.h \
  ../app.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/retargetserial.h \
- /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/retargetserialhalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/bsp/thunderboard/util.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/bsp/thunderboard/si1133.h \
  /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/EFR32MG12_BRD4166A/config/si1133_config.h \
@@ -253,10 +251,6 @@ main.o: ../main.c ../init_mcu.h ../board_features.h \
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/bsp/bsp_bcp.h:
 
 ../app.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/drivers/retargetserial.h:
-
-/Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/halconfig/retargetserialhalconfig.h:
 
 /Users/clfilho/SimplicityStudio/March20/TBS2_ALSLog/hardware/kit/common/bsp/thunderboard/util.h:
 
