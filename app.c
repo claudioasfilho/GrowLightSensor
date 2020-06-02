@@ -437,7 +437,7 @@ void appMain(gecko_configuration_t *pconfig)
     	  {
 			  case SEC_TIMER_HANDLE:
 					  application_task();
-					  //GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+					  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
 				  break;
 			  case MINUTE_TIMER_HANDLE:
 					  update_calendar();
